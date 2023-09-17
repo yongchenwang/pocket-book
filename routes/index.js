@@ -9,13 +9,21 @@ let db = low(adapter);
 
 let shortid = require('shortid');
 
+let moment = require('moment');
+const RecordModel = require('../models/RecordModel');
+
 router.get('/', function(req, res) {
   res.render('index', { title: 'Pocket Book' });
 });
 
 router.get('/record', function(req, res) {
-  let records = db.get('records').value();
-  res.render('list', {records: records});
+  RecordModel.find().sort({time: -1}).then((records) => {
+    res.render('list', {records: records, moment: moment});
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+    return;
+  })
 });
 
 router.get('/record/create', function(req, res,) {
@@ -23,15 +31,27 @@ router.get('/record/create', function(req, res,) {
 });
 
 router.post('/record', function(req, res) {
-  let id = shortid.generate();
-  db.get('records').unshift({id:id, ...req.body}).write();
-  res.render('success', {msg: 'Create record success!', url: '/record'});
+  RecordModel.create({
+    ...req.body,
+    time: moment(req.body.time).toDate(),
+  }).then((record) => {
+    res.render('success', {msg: 'Create record success!', url: '/record'});
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+    return;
+  })
 });
 
 router.get('/record/delete/:id', function(req, res) {
   let id = req.params.id;
-  db.get('records').remove({id: id}).write();
-  res.render('success', {msg: 'Delete record success!', url: '/record'});
+  RecordModel.deleteOne({_id: id}).then((record) => {
+    res.render('success', {msg: 'Delete record success!', url: '/record'});
+  })
+  .catch((err) => {
+    res.status(500).send(err);
+    return;
+  })
 });
 
 router.all('*',(req,res)=>{

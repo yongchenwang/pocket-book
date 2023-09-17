@@ -32,16 +32,16 @@
           <hr />
           <div class="records">
             <% records.forEach(function(record){ %>
-            <div class="panel <%= record.type==='-1' ? 'panel-danger' : 'panel-success' %>">
-              <div class="panel-heading"><%= record.time %></div>
+            <div class="panel <%= record.type===-1 ? 'panel-danger' : 'panel-success' %>">
+              <div class="panel-heading"><%= moment(record.time).format('LL') %></div>
               <div class="panel-body">
                 <div class="col-xs-6"><%= record.event %></div>
                 <div class="col-xs-2 text-center">
-                  <span class="label <%= record.type==='-1' ? 'label-warning' : 'label-success' %>"><%= record.type==='-1' ? 'Expense' : 'Income' %></span>
+                  <span class="label <%= record.type===-1 ? 'label-warning' : 'label-success' %>"><%= record.type===-1 ? 'Expense' : 'Income' %></span>
                 </div>
                 <div class="col-xs-2 text-right">$<%= record.amount %></div>
                 <div class="col-xs-2 text-right">
-                  <a href="/record/delete/<%= record.id %>">
+                  <a class = "delBtn" href="/record/delete/<%= record._id %>">
                     <span
                       class="glyphicon glyphicon-remove"
                       aria-hidden="true"
@@ -57,4 +57,16 @@
       </div>
     </div>
   </body>
+  <script>
+    let delBtns = document.querySelectorAll('.delBtn');
+    delBtns.forEach(item => {
+      item.addEventListener('click', function(e){
+        if(confirm('Are you sure to delete this record?')){
+          return true;
+        } else {
+          e.preventDefault();
+        }
+      })
+    })
+  </script>
 </html>
