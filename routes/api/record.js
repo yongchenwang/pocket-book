@@ -1,16 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-let low = require('lowdb');
-let FileSync = require('lowdb/adapters/FileSync');
-
-let adapter = new FileSync(__dirname + '/../data/db.json');
-let db = low(adapter);
-
-let shortid = require('shortid');
-
 let moment = require('moment');
-const RecordModel = require('../models/RecordModel');
+const RecordModel = require('../../models/RecordModel');
 
 router.get('/', function(req, res) {
   res.render('index', { title: 'Pocket Book' });

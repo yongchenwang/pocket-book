@@ -15,6 +15,7 @@ Pocket-Book is a full-stack web application designed to help you manage your fin
 
 - **Expense Tracking:** Easily add and remove your expenses and incomes.
 - **Data Persistence:** Utilizes a database to store your financial data.
+- **Responsive Design:** Access Pocket-Book from various devices.
 
 ## Technologies Used
 
@@ -23,10 +24,8 @@ Pocket-Book is a full-stack web application designed to help you manage your fin
 - [MongoDB](https://www.mongodb.com/) - NoSQL database for data storage.
 - [EJS](https://ejs.co/) - Templating engine for generating dynamic HTML.
 - [Mongoose](https://mongoosejs.com/) - MongoDB object modeling for Node.js.
-- [Lowdb](https://github.com/typicode/lowdb) - Lightweight JSON database.
 - [Moment.js](https://momentjs.com/) - JavaScript date library for parsing and formatting dates.
 - [Shortid](https://github.com/dylang/shortid) - Generate short, non-sequential, URL-friendly unique IDs.
-- [Express.js](https://expressjs.com/) - Web application framework for Node.js.
 
 ## Getting Started
 
@@ -37,7 +36,7 @@ To run Pocket-Book locally, follow these steps:
 1. Clone this repository to your local machine:
 
    ```bash
-   git clone https://github.com/your-username/pocket-book.git
+   git clone https://github.com/yongchenwang/pocket-book.git
 
 2. Navigate to the project directory:
 
